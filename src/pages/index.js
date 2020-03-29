@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import Header from './components/header'
 
 const Layout = ({data}) => {
@@ -20,7 +20,7 @@ const Layout = ({data}) => {
                             key={frontmatter.path}
                             style={{ marginBottom: '20px' }}
                         >
-                            {frontmatter.title}
+                            <Link to={frontmatter.path}>{frontmatter.title}</Link>
                         </div>
                     )
                 })}
