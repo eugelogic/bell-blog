@@ -1,10 +1,22 @@
 import React from 'react'
+import { Link } from 'gatsby'
 
-const SingleTagIndexTemplate = () => {
+const SingleTagIndexTemplate = ({ pageContext }) => {
+    const { posts, tagName } = pageContext
     return (
-        <div>
-            <h2>Tag: <em>name of the tag</em></h2>
-            <p><em>List of posts with this tag ...</em></p>
+        <div style={{ fontFamily: 'avenir' }}>
+            <h2>Tag: {`${tagName}`}</h2>
+            <ul>
+                {posts.map((post, index) => {
+                    return (
+                        <li key={index}>
+                            <Link style={{textDecoration: 'none'}} to={post.frontmatter.path}>
+                                <h3>{post.frontmatter.title}</h3>
+                            </Link>
+                        </li>
+                    )
+                })}
+            </ul>
         </div>
     )
 }
