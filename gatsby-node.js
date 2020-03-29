@@ -6,7 +6,7 @@ exports.createPages = (({ graphql, actions}) => {
         const blogPostTemaplate = path.resolve(`src/templates/blogPost.js`)
         resolve(graphql(`
             query {
-                allMarkdownRemark {
+                allMarkdownRemark(sort: {fields: frontmatter___date, order: ASC}) {
                     edges {
                         node {
                             frontmatter {
@@ -17,13 +17,16 @@ exports.createPages = (({ graphql, actions}) => {
                 }
             }
         `).then(result => {
-            result.data.allMarkdownRemark.edges.forEach(({node}) => {
+            const posts = result.data.allMarkdownRemark.edges
+            posts.forEach(({node}, index ) => {
                 const path = node.frontmatter.path
                     createPage({
                         path,
                         component: blogPostTemaplate,
                         context: {
-                            pathSlug: path
+                            pathSlug: path,
+                            prev: index === 0 ? null : posts[index - 1].node,
+                            next: index === (posts.length - 1) ? null : posts[index + 1].node
                         }
                     })
                 resolve()
