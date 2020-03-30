@@ -1,13 +1,16 @@
 import React from "react"
 import { Link, graphql } from 'gatsby'
 import Header from '../components/header'
+var slugify = require('slugify')
 
-const Layout = ({data}) => {
+const Layout = ({ data, index }) => {
     const { edges } = data.allMarkdownRemark
     return (
         <div>
             <Header />
-            <div style={{
+            <article
+            key={index}
+            style={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -16,15 +19,32 @@ const Layout = ({data}) => {
                 {edges.map(edge => {
                     const { frontmatter } = edge.node
                     return (
-                        <div
-                            key={frontmatter.path}
-                            style={{ marginBottom: '20px' }}
-                        >
-                            <Link to={frontmatter.path}>{frontmatter.title}</Link>
-                        </div>
+                        <>
+                            {frontmatter.tags && frontmatter.tags.length ? (
+                                <ul>
+                                    {frontmatter.tags.map((tag, index) => {
+                                        return (
+                                            <li key={index}>
+                                                <Link to={`/tags/${slugify(tag, { lower: true })}`}>
+                                                    {tag}
+                                                </Link>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            ) : null }
+                            <h2
+                                key={frontmatter.path}
+                                style={{ marginBottom: '20px' }}
+                            >
+                                <Link to={frontmatter.path}>{frontmatter.title}</Link>
+                            </h2>
+                            <time>{frontmatter.date}</time>
+                            <p>{frontmatter.excerpt}</p>
+                        </>
                     )
                 })}
-            </div>
+            </article>
         </div>
     )
 }
@@ -40,6 +60,8 @@ export const query = graphql`
                         title
                         date(formatString: "dddd DD MMMM YYYY")
                         path
+                        excerpt
+                        tags
                     }
                 }
             }
