@@ -1,21 +1,22 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
 import Header from '../components/header'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 var slugify = require('slugify')
 
 const BlogPostTemplate = ({ data, pageContext }) => {
     const { prev, next } = pageContext
-    const { markdownRemark } = data
+    const { mdx } = data
     return (
         <>
             <Header />
             <div style={{ fontFamily: 'avenir' }}>
-                {markdownRemark.frontmatter.tags && markdownRemark.frontmatter.tags.length ? (
+                {mdx.frontmatter.tags && mdx.frontmatter.tags.length ? (
                     <ul style={{
                         listStyle: 'none',
                         display: 'flex'
                     }}>
-                        {markdownRemark.frontmatter.tags.map((tag, index) => {
+                        {mdx.frontmatter.tags.map((tag, index) => {
                             return (
                                 <li key={index} style={{ marginRight: '20px' }}>
                                     <Link to={`/blog/tags/${slugify(tag, {lower: true})}`}>
@@ -26,7 +27,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
                         }
                     </ul>
                 ) : null }
-                <h1>{markdownRemark.frontmatter.title}</h1>
+                <h1>{mdx.frontmatter.title}</h1>
                 <div>
                     <ul style={{
                         display: 'flex',
@@ -36,12 +37,8 @@ const BlogPostTemplate = ({ data, pageContext }) => {
                         {next && <li><Link style={{textDecoration: 'none'}} to={`/blog/${next.frontmatter.path}`}>NEXT</Link></li>}
                     </ul>
                 </div>
-                <time>{markdownRemark.frontmatter.date}</time>
-                <div
-                    className="blog-post-template"
-                    dangerouslySetInnerHTML={{__html: markdownRemark.html}}
-                >
-                </div>
+                <time>{mdx.frontmatter.date}</time>
+                <MDXRenderer>{mdx.body}</MDXRenderer>
             </div>
         </>
     )
@@ -51,7 +48,7 @@ export default BlogPostTemplate
 
 export const query = graphql`
     query ($pathSlug: String!) {
-        markdownRemark(frontmatter: { path: { eq: $pathSlug } } ) {
+        mdx(frontmatter: { path: { eq: $pathSlug } } ) {
             id
             frontmatter {
                 title
@@ -59,7 +56,7 @@ export const query = graphql`
                 date(formatString: "dddd DD MMMM YYYY")
                 tags
             }
-            html
+            body
         }
     }
 `

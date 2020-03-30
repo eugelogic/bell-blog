@@ -1,0 +1,9 @@
+.shoutout {
+  background-color: yellow;
+  padding: 20px;
+}
+
+.shoutout h3,
+.shoutout p {
+  text-transform: uppercase;
+}

@@ -47,7 +47,7 @@ exports.createPages = (({ graphql, actions}) => {
         const blogPostTemaplate = path.resolve(`src/templates/blogPost.js`)
         resolve(graphql(`
             query {
-                allMarkdownRemark(
+                allMdx(
                     sort: { fields: frontmatter___date, order: ASC },
                     filter: { frontmatter: { draft: { eq: false } } }
                     ) {
@@ -63,7 +63,7 @@ exports.createPages = (({ graphql, actions}) => {
                 }
             }
         `).then(result => {
-            const posts = result.data.allMarkdownRemark.edges
+            const posts = result.data.allMdx.edges
 
             createTagPages(createPage, posts)
 
@@ -84,3 +84,11 @@ exports.createPages = (({ graphql, actions}) => {
         )
     })
 })
+
+exports.onCreateWebpackConfig = ({ actions: { setWebpackConfig } }) => {
+    setWebpackConfig({
+        resolve: {
+            modules: [path.resolve(__dirname, "src"), "node_modules"],
+        },
+    })
+}

@@ -4,7 +4,7 @@ import Header from '../components/header'
 var slugify = require('slugify')
 
 const Layout = ({ data, index }) => {
-    const { edges } = data.allMarkdownRemark
+    const { edges } = data.allMdx
     return (
         <div>
             <Header />
@@ -53,7 +53,7 @@ export default Layout
 
 export const query = graphql`
     query BlogsListQuery {
-        allMarkdownRemark(
+        allMdx(
             sort: { fields: frontmatter___date, order: DESC },
             filter: { frontmatter: { draft: { eq: false } } }
             ) {
