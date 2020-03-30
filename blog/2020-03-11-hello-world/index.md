@@ -1,6 +1,6 @@
 ---
 title: "Hello World"
-path: "/hello-world"
+path: "hello-world"
 date: "2020-03-11"
 draft: false
 excerpt: "This is my first post. Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."

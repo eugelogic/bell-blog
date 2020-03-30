@@ -14,7 +14,7 @@ const AllTagsIndexTemplate = ({ pageContext }) => {
                     {tags.map((tagName, index) => {
                         return (
                             <li key={index}>
-                                <Link style={{textDecoration: 'none'}} to={`/tags/${slugify(tagName, {lower: true})}`}>
+                                <Link style={{textDecoration: 'none'}} to={`/blog/tags/${slugify(tagName, {lower: true})}`}>
                                     <h3>{tagName}</h3>
                                 </Link>
                             </li>

@@ -18,7 +18,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
                         {markdownRemark.frontmatter.tags.map((tag, index) => {
                             return (
                                 <li key={index} style={{ marginRight: '20px' }}>
-                                    <Link to={`/tags/${slugify(tag, {lower: true})}`}>
+                                    <Link to={`/blog/tags/${slugify(tag, {lower: true})}`}>
                                         {tag}
                                     </Link>
                                 </li>
@@ -32,8 +32,8 @@ const BlogPostTemplate = ({ data, pageContext }) => {
                         display: 'flex',
                         listStyle: 'none'
                     }}>
-                        {prev && <li style={{marginRight: '40px'}}><Link style={{textDecoration: 'none'}} to={prev.frontmatter.path}>PREV</Link></li>}
-                        {next && <li><Link style={{textDecoration: 'none'}} to={next.frontmatter.path}>NEXT</Link></li>}
+                        {prev && <li style={{marginRight: '40px'}}><Link style={{textDecoration: 'none'}} to={`/blog/${prev.frontmatter.path}`}>PREV</Link></li>}
+                        {next && <li><Link style={{textDecoration: 'none'}} to={`/blog/${next.frontmatter.path}`}>NEXT</Link></li>}
                     </ul>
                 </div>
                 <time>{markdownRemark.frontmatter.date}</time>

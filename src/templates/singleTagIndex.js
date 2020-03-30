@@ -13,7 +13,7 @@ const SingleTagIndexTemplate = ({ pageContext }) => {
                     {posts.map((post, index) => {
                         return (
                             <li key={index}>
-                                <Link style={{textDecoration: 'none'}} to={post.frontmatter.path}>
+                                <Link style={{textDecoration: 'none'}} to={`/blog/${post.frontmatter.path}`}>
                                     <h3>{post.frontmatter.title}</h3>
                                 </Link>
                             </li>

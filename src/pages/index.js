@@ -25,7 +25,7 @@ const Layout = ({ data, index }) => {
                                     {frontmatter.tags.map((tag, index) => {
                                         return (
                                             <li key={index}>
-                                                <Link to={`/tags/${slugify(tag, { lower: true })}`}>
+                                                <Link to={`/blog/tags/${slugify(tag, { lower: true })}`}>
                                                     {tag}
                                                 </Link>
                                             </li>
@@ -37,7 +37,7 @@ const Layout = ({ data, index }) => {
                                 key={frontmatter.path}
                                 style={{ marginBottom: '20px' }}
                             >
-                                <Link to={frontmatter.path}>{frontmatter.title}</Link>
+                                <Link to={`/blog/${frontmatter.path}`}>{frontmatter.title}</Link>
                             </h2>
                             <time>{frontmatter.date}</time>
                             <p>{frontmatter.excerpt}</p>

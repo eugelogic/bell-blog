@@ -1,6 +1,6 @@
 ---
 title: "Second Post"
-path: "/second-post"
+path: "second-post"
 date: "2020-03-19"
 draft: false
 excerpt: "Second post of the serie. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."

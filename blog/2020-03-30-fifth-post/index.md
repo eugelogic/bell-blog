@@ -1,6 +1,6 @@
 ---
 title: "Fifth Post"
-path: "/fifth-post"
+path: "fifth-post"
 date: "2020-03-30"
 draft: false
 excerpt: "Fifth post, I'm cruising now. Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
