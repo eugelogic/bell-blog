@@ -11,17 +11,27 @@ export const TitleAndDescription = ({ data }) => {
             alignItems: 'center',
             fontFamily: 'avenir'
         }}>
-            <h2 style={{marginBottom: 0}}>
+            <h1 style={{marginBottom: 0}}>
                 <Link to={`/`} style={{ textDecoration: 'none' }}>
                     {title}
                 </Link>
-            </h2>
+            </h1>
             <p style={{
                 marginTop: 0,
                 opacity: 0.5
             }}>
                 {description}
             </p>
+            <h3 style={{ marginTop: '0' }}>
+                <Link
+                to={`/blog/tags/`}
+                style={{
+                    textDecoration: 'none',
+                    textTransform: 'uppercase'
+                    }}>
+                    See all tags
+                </Link>
+                </h3>
         </div>
     )
 }
