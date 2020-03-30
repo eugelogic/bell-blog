@@ -1,4 +1,5 @@
 const path = require(`path`)
+var slugify = require('slugify')
 
 const createTagPages = (createPage, posts) => {
     const allTagsIndexTemplate = path.resolve(`src/templates/allTagsIndex.js`)
@@ -9,10 +10,11 @@ const createTagPages = (createPage, posts) => {
     posts.forEach(({node}) => {
         if (node.frontmatter.tags) {
             node.frontmatter.tags.forEach(tag => {
-                if (!postsByTag[tag]) {
-                    postsByTag[tag] = []
+                const tagSlug = slugify(tag, { lower: true });
+                if (!postsByTag[tagSlug]) {
+                    postsByTag[tagSlug] = []
                 }
-                postsByTag[tag].push(node)
+                postsByTag[tagSlug].push(node)
             })
         }
     })
