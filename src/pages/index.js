@@ -53,7 +53,10 @@ export default Layout
 
 export const query = graphql`
     query BlogsListQuery {
-        allMarkdownRemark(sort: {fields: frontmatter___date, order: DESC}) {
+        allMarkdownRemark(
+            sort: { fields: frontmatter___date, order: DESC },
+            filter: { frontmatter: { draft: { eq: false } } }
+            ) {
             edges {
                 node {
                     frontmatter {

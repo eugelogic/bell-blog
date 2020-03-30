@@ -47,7 +47,10 @@ exports.createPages = (({ graphql, actions}) => {
         const blogPostTemaplate = path.resolve(`src/templates/blogPost.js`)
         resolve(graphql(`
             query {
-                allMarkdownRemark(sort: {fields: frontmatter___date, order: ASC}) {
+                allMarkdownRemark(
+                    sort: { fields: frontmatter___date, order: ASC },
+                    filter: { frontmatter: { draft: { eq: false } } }
+                    ) {
                     edges {
                         node {
                             frontmatter {
