@@ -10,11 +10,10 @@ const createTagPages = (createPage, posts) => {
     posts.forEach(({node}) => {
         if (node.frontmatter.tags) {
             node.frontmatter.tags.forEach(tag => {
-                const tagSlug = slugify(tag, { lower: true });
-                if (!postsByTag[tagSlug]) {
-                    postsByTag[tagSlug] = []
+                if (!postsByTag[tag]) {
+                    postsByTag[tag] = []
                 }
-                postsByTag[tagSlug].push(node)
+                postsByTag[tag].push(node)
             })
         }
     })
@@ -32,7 +31,7 @@ const createTagPages = (createPage, posts) => {
         const posts = postsByTag[tagName]
 
         createPage({
-            path: `/tags/${tagName}`,
+            path: `/tags/${slugify(tagName, {lower: true})}`,
             component: singleTagIndexTemplate,
             context: {
                 posts,
