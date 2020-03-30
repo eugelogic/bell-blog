@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
 import Header from '../components/header'
+var slugify = require('slugify')
 
 const BlogPostTemplate = ({ data, pageContext }) => {
     const { prev, next } = pageContext
@@ -9,6 +10,22 @@ const BlogPostTemplate = ({ data, pageContext }) => {
         <>
             <Header />
             <div style={{ fontFamily: 'avenir' }}>
+                {markdownRemark.frontmatter.tags && markdownRemark.frontmatter.tags.length ? (
+                    <ul style={{
+                        listStyle: 'none',
+                        display: 'flex'
+                    }}>
+                        {markdownRemark.frontmatter.tags.map((tag, index) => {
+                            return (
+                                <li key={index} style={{ marginRight: '20px' }}>
+                                    <Link to={`/tags/${slugify(tag, {lower: true})}`}>
+                                        {tag}
+                                    </Link>
+                                </li>
+                            )})
+                        }
+                    </ul>
+                ) : null }
                 <h1>{markdownRemark.frontmatter.title}</h1>
                 <div>
                     <ul style={{
@@ -40,7 +57,6 @@ export const query = graphql`
                 title
                 path
                 date(formatString: "dddd DD MMMM YYYY")
-                excerpt
                 tags
             }
             html
